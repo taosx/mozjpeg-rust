@@ -355,7 +355,6 @@ impl Compress {
     }
 
     pub fn enable_arith_code(&mut self) {
-        println!("{:?}", self);
         unsafe {
             self.cinfo.arith_code = 1;
         }
