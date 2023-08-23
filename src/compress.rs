@@ -305,6 +305,13 @@ impl Compress {
         }
     }
 
+    pub fn set_max_compression(&mut self) {
+        unsafe {
+            ffi::jpeg_c_set_int_param(&mut self.cinfo, J_INT_PARAM::JINT_COMPRESS_PROFILE, ffi::JINT_COMPRESS_PROFILE_VALUE::JCP_MAX_COMPRESSION as c_int);
+            ffi::jpeg_set_defaults(&mut self.cinfo);
+        }
+    }
+
     /// Reset to libjpeg v6 settings
     ///
     /// It gives files identical with libjpeg-turbo
