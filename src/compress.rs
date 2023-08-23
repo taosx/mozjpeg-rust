@@ -305,6 +305,14 @@ impl Compress {
         }
     }
 
+    pub fn dct_method(&mut self, method: DctMethod) {
+        self.cinfo.dct_method = match method {
+            DctMethod::IntegerSlow => ffi::J_DCT_METHOD::JDCT_ISLOW,
+            DctMethod::IntegerFast => ffi::J_DCT_METHOD::JDCT_IFAST,
+            DctMethod::Float => ffi::J_DCT_METHOD::JDCT_FLOAT,
+        }
+    }
+
     pub fn set_max_compression(&mut self) {
         unsafe {
             ffi::jpeg_c_set_int_param(&mut self.cinfo, J_INT_PARAM::JINT_COMPRESS_PROFILE, ffi::JINT_COMPRESS_PROFILE_VALUE::JCP_MAX_COMPRESSION as c_int);
